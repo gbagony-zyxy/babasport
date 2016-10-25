@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cn.itcast.common.page.Pagination;
 import edu.wxz.core.bean.product.Brand;
-import edu.wxz.core.dao.product.BrandMapper;
+import edu.wxz.core.dao.mapper.product.BrandMapper;
 
 @Service
 @Transactional
@@ -45,5 +45,10 @@ public class BrandServiceImp implements BrandService{
 	@Override
 	public void updateBrandByKey(Brand brand) {
 		brandMapper.updateBrandByKey(brand);
+	}
+
+	@Override
+	public Brand getBrandByKey(Integer id) {
+		return brandMapper.getBrandByKey(id);
 	}
 }

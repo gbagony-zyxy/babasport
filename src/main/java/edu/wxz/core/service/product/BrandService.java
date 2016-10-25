@@ -18,4 +18,7 @@ public interface BrandService {
 
 	// 修改
 	public void updateBrandByKey(Brand brand);
+	
+	//通过key获取品牌信息
+	public Brand getBrandByKey(Integer id);
 }

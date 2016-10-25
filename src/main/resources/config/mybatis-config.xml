@@ -9,37 +9,17 @@
 		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 
-	<!-- 读取jdbc配置 -->
-	<bean
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="locations">
-			<list>
-				<!-- jdbc配置 -->
-				<value>classpath:properties/jdbc.properties</value>
-				<!-- memcached配置 -->
-			</list>
-		</property>
-	</bean>
-
-	<!-- c3p0 -->
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-		<property name="driverClass" value="${driverClass}"></property>
-		<property name="jdbcUrl" value="${jdbcUrl}"></property>
-		<property name="user" value="${user}"></property>
-		<property name="password" value="${password}"></property>
-	</bean>
-
 	<!-- mybatis sessionFactory配置,提供的支持都是在mybatis-spring整合包中 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
-		<!-- <property name="mapperLocations" value="classpath:edu/wxz/core/dao/product/*.xml"/> -->
-		<!-- <property name="typeAliasesPackage" value="edu.wxz.core.bean.product"></property> -->
+		<!-- <property name="mapperLocations" value="classpath*:edu/wxz/core/dao/mapper/product/*Mapper.xml"/> -->
+		<property name="typeAliasesPackage" value="edu.wxz.core.bean.product"></property>
 	</bean>
 
 	<!-- 扫包 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="edu.wxz.core.dao.product"></property>
+		<property name="basePackage" value="edu.wxz.core.dao.mapper.product"></property>
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
-		<property name="processPropertyPlaceHolders" value="true"></property>
+		<!-- <property name="processPropertyPlaceHolders" value="true"></property> -->
 	</bean>
 </beans>

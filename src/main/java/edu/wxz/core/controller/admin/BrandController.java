@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.itcast.common.page.Pagination;
 import edu.wxz.core.bean.product.Brand;
@@ -95,6 +96,21 @@ public class BrandController {
 			model.addAttribute("isDisplay", isDisplay);
 		}
 
+		return "redirect:/brand/list.do";
+	}
+	
+	//获取要修改的页面信息
+	@RequestMapping(value="/getEdit.do",method=RequestMethod.GET)
+	public String getEditInfo(Integer id,ModelMap model){
+		Brand brand = brandService.getBrandByKey(id);
+		model.addAttribute("brand", brand);
+		return "brand/edit";
+	}
+	
+	//修改页面信息并重定向页面
+	@RequestMapping(value="/editInfo.do",method=RequestMethod.POST)
+	public String editInfo(Brand brand){
+		brandService.updateBrandByKey(brand);
 		return "redirect:/brand/list.do";
 	}
 }

@@ -1,4 +1,4 @@
-package edu.wxz.core.dao.product;
+package edu.wxz.core.dao.mapper.product;
 
 import java.util.List;
 

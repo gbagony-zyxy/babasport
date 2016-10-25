@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.wxz.core.bean.TestDB;
-import edu.wxz.core.dao.TestDBMapper;
+import edu.wxz.core.dao.mapper.TestDBMapper;
 
 //在类上添加事物,则类对应的方法都具有事务，对于有些方法则可以添加readOnly属性
 

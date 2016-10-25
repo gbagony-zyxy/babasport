@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="edu.wxz.core.dao.product.BrandMapper">
+<mapper namespace="edu.wxz.core.dao.mapper.product.BrandMapper">
 	<!-- resultMap -->
-	<resultMap type="edu.wxz.core.bean.product.Brand" id="brand">
+	<resultMap type="brand" id="brand">
 		<!-- 
 			<id/>唯一标识查询结果集
 		-->
@@ -15,7 +15,7 @@
 	</resultMap>
 
 	<!-- 查询品牌-->
-	<select id="getBrandListWithPage" parameterType="edu.wxz.core.bean.product.Brand" resultMap="brand">
+	<select id="getBrandListWithPage" parameterType="brand" resultMap="brand">
 		SELECT id,name,description,img_url,sort,is_display
 		FROM bbs_brand
 		<where>
@@ -31,7 +31,7 @@
 	</select>
 	
 	<!-- 查询总记录数 -->
-	<select id="getBrandCount" parameterType="edu.wxz.core.bean.product.Brand" resultType="java.lang.Integer">
+	<select id="getBrandCount" parameterType="brand" resultType="int">
 		SELECT COUNT(1)
 		FROM bbs_brand
 		<where>
@@ -45,7 +45,7 @@
 	</select>
 	
 	<!-- 添加品牌 -->
-	<insert id="addBrand" parameterType="edu.wxz.core.bean.product.Brand">
+	<insert id="addBrand" parameterType="brand">
 		INSERT INTO bbs_brand
 		<trim prefix="(" suffix=")">
 			name,
@@ -65,7 +65,7 @@
 	</insert>
 	
 	<!-- 通过主键删除品牌 -->
-	<delete id="deleteBrandBtKey" parameterType="java.lang.Integer">
+	<delete id="deleteBrandBtKey" parameterType="int">
 		delete from bbs_brand
 		<where>
 			id = #{id}
@@ -73,7 +73,7 @@
 	</delete>
 	
 	<!-- 通过主键批量删除品牌 -->
-	<delete id="deleteBrandByKeys" parameterType="java.lang.Integer">
+	<delete id="deleteBrandByKeys" parameterType="int">
 		delete from bbs_brand
 		<where>
 			id in
@@ -84,7 +84,7 @@
 	</delete>		
 	
 	<!-- 修改 -->
-	<update id="updateBrandByKey" parameterType="edu.wxz.core.bean.product.Brand">
+	<update id="updateBrandByKey" parameterType="brand">
 		update bbs_brand 
 		<set>
 			<if test="name != null">
@@ -109,11 +109,13 @@
 	</update>
 	
 	<!-- 通过id查询一个品牌对象 -->
-	<select id="getBrand" parameterType="java.lang.Integer" resultMap="brand">
+	<select id="getBrandByKey" parameterType="int" resultMap="brand">
 		SELECT id,name,description,img_url,sort,is_display
 		FROM bbs_brand
 		<where>
 			id = #{id}
 		</where>
 	</select>
+	
+	<!-- 	 -->
 </mapper>

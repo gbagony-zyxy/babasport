@@ -1,4 +1,4 @@
-package edu.wxz.core.dao;
+package edu.wxz.core.dao.mapper;
 
 import edu.wxz.core.bean.TestDB;
 
