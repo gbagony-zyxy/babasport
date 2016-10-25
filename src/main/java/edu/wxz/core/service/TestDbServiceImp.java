@@ -5,16 +5,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.wxz.core.bean.TestDB;
-import edu.wxz.core.dao.TestDBDao;
+import edu.wxz.core.dao.TestDBMapper;
 
 //在类上添加事物,则类对应的方法都具有事务，对于有些方法则可以添加readOnly属性
 
-@Service("testDbService")
-@Transactional
+//@Service("testDbService")
+//@Transactional
 public class TestDbServiceImp implements TestDbService{
 
 	@Autowired
-	private TestDBDao testDBDao;
+	private TestDBMapper testDBMapper;
 	
 	@Transactional(readOnly = true)
 	public void query(){
@@ -23,7 +23,7 @@ public class TestDbServiceImp implements TestDbService{
 	
 	@Override
 	public void addTestDb(TestDB testDB) {
-		testDBDao.addTestDb(testDB);
+		testDBMapper.addTestDb(testDB);
 		
 		//抛出异常则事务不会提交,默认提交
 		throw new RuntimeException();

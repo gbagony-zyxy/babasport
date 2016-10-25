@@ -4,7 +4,7 @@ import java.util.List;
 
 import edu.wxz.core.bean.product.Brand;
 
-public interface BrandDao {
+public interface BrandMapper {
 	
 	//List集合
 	public List<Brand> getBrandListWithPage(Brand brand);
@@ -23,4 +23,7 @@ public interface BrandDao {
 	
 	//修改
 	public void updateBrandByKey(Brand brand);
+	
+	//通过key获取品牌信息
+	public Brand getBrandByKey(Integer id);
 }

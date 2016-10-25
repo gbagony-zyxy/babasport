@@ -11,13 +11,14 @@ import edu.wxz.core.bean.product.Brand;
 import edu.wxz.core.service.product.BrandService;
 
 @Controller
+@RequestMapping(value="/brand")
 public class BrandController {
 
 	@Autowired
 	private BrandService brandService;
 
 	// 品牌列表页面(查询)
-	@RequestMapping(value = "/brand/list.do")
+	@RequestMapping(value = "/list.do")
 	public String brandList(String name, Integer isDisplay, Integer pageNo, ModelMap modelMap) {
 		Brand brand = new Brand();
 		
@@ -44,7 +45,7 @@ public class BrandController {
 		// 分页
 		Pagination pagination = brandService.getBrandListWithPage(brand);
 
-		String url = "/brand/list.do";
+		String url = "/list.do";
 		pagination.pageView(url, params.toString());
 
 		modelMap.addAttribute("pagination", pagination);
@@ -55,20 +56,20 @@ public class BrandController {
 	}
 
 	// 跳转商品添加页面
-	@RequestMapping(value = "/brand/toAdd.do")
+	@RequestMapping(value = "/toAdd.do")
 	public String toAdd() {
 		return "brand/add";
 	}
 
 	//添加品牌
-	@RequestMapping(value="/brand/add.do")
+	@RequestMapping(value="/add.do")
 	public String add(Brand brand){
 		brandService.addBrand(brand);
 		return "redirect:/brand/list.do";
 	}
 	
 	// 删除品牌,回显内容
-	@RequestMapping(value = "/brand/delete.do")
+	@RequestMapping(value = "/delete.do")
 	public String delBrand(Integer id, String name, String isDisplay, ModelMap model) {
 		brandService.deleteBrandBtKey(id);
 
@@ -79,6 +80,21 @@ public class BrandController {
 			model.addAttribute("isDisplay", isDisplay);
 		}
 		
+		return "redirect:/brand/list.do";
+	}
+	
+	// 批量删除品牌,回显内容
+	@RequestMapping(value = "/deletes.do")
+	public String delBrands(Integer[] ids, String name, String isDisplay, ModelMap model) {
+		brandService.deleteBrandByKeys(ids);
+
+		if (StringUtils.isNotBlank(name)) {
+			model.addAttribute("name", name);
+		}
+		if (null != isDisplay) {
+			model.addAttribute("isDisplay", isDisplay);
+		}
+
 		return "redirect:/brand/list.do";
 	}
 }

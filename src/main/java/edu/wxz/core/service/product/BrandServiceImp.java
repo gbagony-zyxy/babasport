@@ -1,49 +1,49 @@
 package edu.wxz.core.service.product;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.itcast.common.page.Pagination;
 import edu.wxz.core.bean.product.Brand;
-import edu.wxz.core.dao.product.BrandDao;
+import edu.wxz.core.dao.product.BrandMapper;
 
 @Service
 @Transactional
 public class BrandServiceImp implements BrandService{
 
-	@Resource
-	private BrandDao brandDao;
+	@Autowired
+	private BrandMapper brandMapper;
 	
 	@Transactional(readOnly = true)
 	public Pagination getBrandListWithPage(Brand brand){
 		//1、起始页 startRow = (pageNo-1)*pageSize
 		//2、每页数
 		//3、总记录数
-		Pagination pagination = new Pagination(brand.getPageNo(),brand.getPageSize(),brandDao.getBrandCount(brand));
+		System.out.println(brandMapper);
+		Pagination pagination = new Pagination(brand.getPageNo(),brand.getPageSize(),brandMapper.getBrandCount(brand));
 		//数据集合
-		pagination.setList(brandDao.getBrandListWithPage(brand));
+		pagination.setList(brandMapper.getBrandListWithPage(brand));
 		return pagination;
 	}
 
 	@Override
 	public void addBrand(Brand brand) {
-		brandDao.addBrand(brand);
+		brandMapper.addBrand(brand);
 	}
 
 	@Override
 	public void deleteBrandBtKey(Integer id) {
-		brandDao.deleteBrandBtKey(id);
+		brandMapper.deleteBrandBtKey(id);
 	}
 
 	@Override
 	public void deleteBrandByKeys(Integer... ids) {
-		brandDao.deleteBrandByKeys(ids);
+		brandMapper.deleteBrandByKeys(ids);
 	}
 
 	@Override
 	public void updateBrandByKey(Brand brand) {
-		brandDao.updateBrandByKey(brand);
+		brandMapper.updateBrandByKey(brand);
 	}
 }

@@ -12,6 +12,7 @@ public class TestMySql{
 
 	private TestDbService testDbService;
 	
+	@SuppressWarnings("resource")
 	@Before
 	public void init(){
 		ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
