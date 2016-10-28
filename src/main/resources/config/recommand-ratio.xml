@@ -8,18 +8,24 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
 		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
-
-	<!-- mybatis sessionFactory配置,提供的支持都是在mybatis-spring整合包中 -->
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"></property>
-		<!-- <property name="mapperLocations" value="classpath*:edu/wxz/core/dao/mapper/product/*Mapper.xml"/> -->
-		<property name="typeAliasesPackage" value="edu.wxz.core.bean.product,edu.wxz.core.query"></property>
+	
+	<!--  -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:customer/ratio.properties</value>
+			</list>
+		</property>
 	</bean>
-
-	<!-- 扫包 -->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="edu.wxz.core.dao.mapper.product"></property>
-		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
-		<!-- <property name="processPropertyPlaceHolders" value="true"></property> -->
+	
+	
+	<!-- 推荐因子配置 -->
+	<bean id="ratio" class="edu.wxz.core.bean.ratio.Ratio">
+		<property name="populateRatio" ref="populateRatio"/>
+	</bean>
+	
+	<bean id="populateRatio" class="edu.wxz.core.bean.ratio.PopulateRatio">
+		<property name="like" value="${populate.like.ratio}"/>
+		<property name="read" value="${populate.read.ratio}"/>
 	</bean>
 </beans>

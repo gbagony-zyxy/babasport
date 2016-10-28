@@ -2,16 +2,24 @@ package edu.wxz.core.controller;
 
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import edu.wxz.core.bean.ratio.Ratio;
 
 @Controller
 public class ProductController{
 
+	@Autowired
+	private Ratio ratio;
+	
 	@RequestMapping(value = "/test/springmvc.do")
 	public String test(String name, Date birthday){
 		
 		System.out.println(birthday);
+		System.out.println(ratio.getPopulateRatio().getRead());
+		System.out.println(ratio.getPopulateRatio().getLike());
 		return "";
 	}
 

@@ -3,11 +3,15 @@ package edu.wxz.core.dao.mapper.product;
 import java.util.List;
 
 import edu.wxz.core.bean.product.Brand;
+import edu.wxz.core.query.product.BrandQuery;
 
 public interface BrandMapper {
 	
 	//List集合
 	public List<Brand> getBrandListWithPage(Brand brand);
+	
+	//获取list集合
+	public List<Brand> getBrandList(BrandQuery brandQuery);
 	
 	//查询总记录数
 	public int getBrandCount(Brand brand);

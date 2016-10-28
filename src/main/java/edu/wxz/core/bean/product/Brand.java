@@ -1,8 +1,15 @@
 package edu.wxz.core.bean.product;
 
+import java.io.Serializable;
+
 import edu.wxz.core.common.web.Constants;
 
-public class Brand {
+/**
+ * 品牌列表
+ */
+public class Brand implements Serializable {
+
+	private static final long serialVersionUID = 1478256265433872885L;
 
 	private Integer id;
 	private String name;
@@ -10,11 +17,11 @@ public class Brand {
 	private String imgUrl;
 	private Integer sort;
 	private Integer isDisplay;
-	
-	public String getAllUrl(){
+
+	public String getAllUrl() {
 		return Constants.IMAGE_URL + imgUrl;
 	}
-	
+
 	// 页号
 	private Integer pageNo = 1;
 	// 开始行
@@ -35,7 +42,7 @@ public class Brand {
 	}
 
 	public void setPageSize(Integer pageSize) {
-		//计算一次开始行
+		// 计算一次开始行
 		this.startRow = (pageNo - 1) * pageSize;
 		this.pageSize = pageSize;
 	}
@@ -45,7 +52,7 @@ public class Brand {
 	}
 
 	public void setPageNo(Integer pageNo) {
-		//计算一次开始行
+		// 计算一次开始行
 		this.startRow = (pageNo - 1) * pageSize;
 		this.pageNo = pageNo;
 	}

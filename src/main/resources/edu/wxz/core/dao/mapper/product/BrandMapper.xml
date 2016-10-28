@@ -14,6 +14,59 @@
 		<result column="is_display" property="isDisplay"/>
 	</resultMap>
 
+	<sql id="brandSelector">
+		SELECT
+		<if test="fields != null">
+			${fields}
+		</if>
+		<if test="fields == null">
+			id,name,description,img_url,sort,is_display
+		</if>
+		FROM bbs_brand
+	</sql>
+	
+	<!-- brandWhere -->
+	<sql id="brandWhere">
+		<where>
+			<if test="isDisplay != null">
+				is_display = #{isDisplay}
+			</if>
+			<if test="name != null">
+				 <if test="nameLike == true">
+				 	and name like "%"#{name}"%"
+				 </if>
+				 <if test="nameLike ==false">
+				 	and name = #{name}
+				 </if>
+			</if>
+		</where>
+	</sql>
+	
+	<!-- brandOrderBy -->
+	<sql id="brandOrderBy">
+		<if test="fieldOrders !=null and fieldOrders.size > 0">
+			order by 
+			<foreach collection="fieldOrders" item="fieldOrder" separator=",">
+				${fieldOrder.field} ${fieldOrder.order}
+			</foreach>
+		</if>
+	</sql>
+	
+	<!-- brandLimit -->
+	<sql id="brandLimit">
+		<if test="startRow != null">
+			LIMIT #{startRow},#{pageSize}
+		</if>
+	</sql>
+		
+	<!-- 获取品牌列表 -->
+	<select id="getBrandList" parameterType="BrandQuery" resultMap="brand">
+		<include refid="brandSelector"/>
+		<include refid="brandWhere"/>
+		<include refid="brandOrderBy"/>
+		<include refid="brandLimit"/>
+	</select>
+
 	<!-- 查询品牌-->
 	<select id="getBrandListWithPage" parameterType="brand" resultMap="brand">
 		SELECT id,name,description,img_url,sort,is_display
@@ -32,7 +85,7 @@
 	
 	<!-- 查询总记录数 -->
 	<select id="getBrandCount" parameterType="brand" resultType="int">
-		SELECT COUNT(1)
+		SELECT COUNT(*)
 		FROM bbs_brand
 		<where>
 			<if test="isDisplay != null">

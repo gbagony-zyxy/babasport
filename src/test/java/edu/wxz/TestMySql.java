@@ -8,19 +8,19 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import edu.wxz.core.bean.TestDB;
 import edu.wxz.core.service.TestDbService;
 
-public class TestMySql{
+public class TestMySql {
 
 	private TestDbService testDbService;
-	
+
 	@SuppressWarnings("resource")
 	@Before
-	public void init(){
+	public void init() {
 		ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
-		testDbService=(TestDbService) context.getBean("testDbService");
+		testDbService = (TestDbService) context.getBean("testDbService");
 	}
-	
+
 	@Test
-	public void testAdd(){
+	public void testAdd() {
 		TestDB db = new TestDB();
 		db.setName("hello");
 		testDbService.addTestDb(db);

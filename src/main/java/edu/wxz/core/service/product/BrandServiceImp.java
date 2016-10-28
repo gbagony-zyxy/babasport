@@ -1,5 +1,7 @@
 package edu.wxz.core.service.product;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.itcast.common.page.Pagination;
 import edu.wxz.core.bean.product.Brand;
 import edu.wxz.core.dao.mapper.product.BrandMapper;
+import edu.wxz.core.query.product.BrandQuery;
 
 @Service
 @Transactional
@@ -50,5 +53,10 @@ public class BrandServiceImp implements BrandService{
 	@Override
 	public Brand getBrandByKey(Integer id) {
 		return brandMapper.getBrandByKey(id);
+	}
+
+	@Override
+	public List<Brand> getBrandList(BrandQuery brandQuery) {
+		return brandMapper.getBrandList(brandQuery);
 	}
 }
