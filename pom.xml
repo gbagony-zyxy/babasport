@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.gbagony.site</groupId>
-	<artifactId>ShopSite</artifactId>
+	<artifactId>Learn</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ShopSite Maven Webapp</name>
+	<name>Learn Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -31,17 +31,17 @@
 		<javax.servlet-jsp-version>2.0</javax.servlet-jsp-version>
 		<cglib-version>2.2.2</cglib-version>
 		<slf4j-api-version>1.6.6</slf4j-api-version>
+		<zxing-version>3.2.1</zxing-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 	</properties>
 
 	<dependencies>
-		<!-- with junit4.8.2 -->
+		<!-- with junit 4.12 -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit-version}</version>
-			<type>jar</type>
 		</dependency>
 		<!-- with spring -->
 		<dependency>
@@ -100,7 +100,7 @@
 			<artifactId>spring-instrument-tomcat</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		<!--springmvc 杞?Json -->
+		<!--springmvc Json -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
@@ -271,10 +271,27 @@
 			<version>1.0</version>
 		</dependency>
 
+		<!-- ZXing -->
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>${zxing-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>javase</artifactId>
+			<version>${zxing-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.20</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
-		<finalName>ShopSite</finalName>
+		<finalName>learning</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -297,26 +314,13 @@
 					<password>123456</password>
 				</configuration>
 			</plugin>
-			<!-- <plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
-				<version>7.1.6.v20200715</version>
-				<configuration>
-					<scanIntervalSecond>10</scanIntervalSecond>
-					<webAppConfig>
-						<contextPath>/</contextPath>
-					</webAppConfig>
-				</configuration>
-			</plugin> -->
+			<!-- <plugin> <groupId>org.mortbay.jetty</groupId> <artifactId>jetty-maven-plugin</artifactId> 
+				<version>7.1.6.v20200715</version> <configuration> <scanIntervalSecond>10</scanIntervalSecond> 
+				<webAppConfig> <contextPath>/</contextPath> </webAppConfig> </configuration> 
+				</plugin> -->
 		</plugins>
-		
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-				<includes>
-					<include>*.xml</include>
-				</includes>
-			</resource>
-		</resources>
+
+		<!-- <resources> <resource> <directory>src/main/resources</directory> <includes> 
+			<include>*.xml</include> </includes> </resource> </resources> -->
 	</build>
 </project>

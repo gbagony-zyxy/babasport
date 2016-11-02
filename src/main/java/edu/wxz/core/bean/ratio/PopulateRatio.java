@@ -20,4 +20,5 @@ public class PopulateRatio {
 	public void setLike(double like) {
 		this.like = like;
 	}
+
 }

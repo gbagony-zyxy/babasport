@@ -9,21 +9,12 @@
 		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 	
-	<!--  -->
-	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="locations">
-			<list>
-				<value>classpath:customer/ratio.properties</value>
-			</list>
-		</property>
-	</bean>
-	
-	
 	<!-- 推荐因子配置 -->
 	<bean id="ratio" class="edu.wxz.core.bean.ratio.Ratio">
 		<property name="populateRatio" ref="populateRatio"/>
 	</bean>
 	
+	<!-- 从JVM系统中获取 -->
 	<bean id="populateRatio" class="edu.wxz.core.bean.ratio.PopulateRatio">
 		<property name="like" value="${populate.like.ratio}"/>
 		<property name="read" value="${populate.read.ratio}"/>
